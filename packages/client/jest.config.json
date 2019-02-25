@@ -1,0 +1,10 @@
+{
+  "preset": "ts-jest",
+  "rootDir": "./",
+  "displayName": "client",
+  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTest.ts",
+  "testMatch": [
+    "<rootDir>/**/*.(spec|test).(tsx|ts)"
+  ],
+  "testEnvironment": "jsdom"
+}

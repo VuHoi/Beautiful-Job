@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "name": "social-network-profressional",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/VuHoi/Social-Network-Profressional.git",
+  "author": "vuhoi <toilahoi007@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "lint-fix": "tslint --fix --exclude packages/*/node_modules/**/*.ts --project tsconfig.json",
+    "server": "ts-node-dev --respawn --transpileOnly packages/server/src/index.ts",
+    "client": "cd packages/client && yarn start",
+    "prettier-fix": "prettier --write",
+    "generate-schema": "graphql get-schema",
+    "test": "jest --bail --verbose --config=jest.config.json",
+    "test-client": "cd packages/client && jest --bail --verbose --config=jest.config.json",
+    "test-server": "cd packages/server && jest --bail --config=jest.config.json",
+    "cypress": "cypress open"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "preset": "ts-jest",
+  "rootDir": "./",
+  "displayName": "server",
+  "testMatch": [
+    "<rootDir>/**/*.(spec|test).ts"
+  ],
+  "testEnvironment": "node"
+}

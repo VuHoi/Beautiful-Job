@@ -1,0 +1,25 @@
+# source: http://localhost:5000/graphql
+# timestamp: Tue Jan 22 2019 15:13:29 GMT-0500 (Eastern Standard Time)
+
+type Mutation {
+  register(input: RegisterInput!): User!
+}
+
+type Query {
+  user(email: String!): User!
+}
+
+input RegisterInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  name: String!
+}

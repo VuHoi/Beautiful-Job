@@ -1,0 +1,5 @@
+{
+  "schema": {
+    "file": "packages/server/src/graphql/generated/schema.graphql"
+  }
+}
