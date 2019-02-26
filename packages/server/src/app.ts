@@ -1,17 +1,17 @@
 import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { createConnection } from 'typeorm';
 import { GraphQL } from './graphql';
 import { GraphQLSchema } from 'graphql';
 import { formatArgumentValidationError } from 'type-graphql';
 import { databaseInitializer } from './initializers/database';
-
+import * as dotenv from "dotenv";
 class App {
 	public app: express.Application;
 	public apolloServer: ApolloServer;
 
 	constructor() {
+		dotenv.config();
 		this.app = express();
 		this.configGraphql().catch((err: Error) =>
 			// tslint:disable-next-line
