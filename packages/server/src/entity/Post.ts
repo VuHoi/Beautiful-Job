@@ -3,8 +3,8 @@ import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 
 @ObjectType()
-@Entity('cards')
-export class Card {
+@Entity('posts')
+export class Post {
     @Field(() => ID)    
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -14,24 +14,17 @@ export class Card {
     @CreateDateColumn()
     created_at: Date;
 
-    @Field()
-    @UpdateDateColumn()
-    updated_at: Date;
 
     @Field()
     @Column('text')
-    title: string;
+    content: string;
 
-    @Field()
-    @Column('text', {
-        nullable: true,
-    })
-    description: string;
+  
 
     @Field()
     @Column('boolean', {
-        default: "false",
+        default: "true",
     })
-    done: boolean;
+    isPublic: boolean;
 
 }
