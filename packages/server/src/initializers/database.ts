@@ -2,6 +2,7 @@ import { createConnection } from 'typeorm';
 import { Card } from '../entity/Card';
 import { User } from '../entity/User';
 import { Post } from '../entity/Post';
+import { UserPost } from '../entity/UserPost';
 export const databaseInitializer = async () => {
 
     return await createConnection({
@@ -15,7 +16,8 @@ export const databaseInitializer = async () => {
         entities: [
             Card,
             User,
-            Post
+            Post,
+            UserPost
         ],
         logging: JSON.parse(process.env.TYPEORM_LOGGING),
         synchronize: JSON.parse(process.env.TYPEORM_SYNCHRONIZE),

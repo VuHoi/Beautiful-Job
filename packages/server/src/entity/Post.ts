@@ -1,13 +1,14 @@
-import {Entity,PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn} from 'typeorm';
+import {Entity,PrimaryGeneratedColumn,Column, CreateDateColumn, OneToMany} from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
+import { UserPost } from './UserPost';
 
 @ObjectType()
 @Entity('posts')
 export class Post {
     @Field(() => ID)    
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: number;
 
     @Field()
     @IsDate()
@@ -27,4 +28,6 @@ export class Post {
     })
     isPublic: boolean;
 
+    @OneToMany(() => UserPost, userpost => userpost.posts)
+    userPost: Promise<UserPost[]>;
 }
