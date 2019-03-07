@@ -1,7 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
 import { Field, ID, ObjectType, Root } from 'type-graphql';
 import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
-import { IsEmail } from 'class-validator';
+import { IsEmail, IsDate } from 'class-validator';
 import { Card } from './Card';
 import { UserPost } from './UserPost';
 
@@ -20,6 +20,22 @@ export class User extends BaseEntity {
 	@Column()
 	lastName: string;
 
+	@Field()
+	@Column()
+	middleName: string;
+
+	@Field()
+	@Column()
+	avatar: string;
+
+	@Field()
+	@Column('text',{default:'user'})
+	role: string;
+
+	@Field()
+	@Column("bool", { default: false })
+	isActived: boolean;
+
 	@Column('text', { unique: true })
 	password: string;
 
@@ -29,6 +45,15 @@ export class User extends BaseEntity {
 	@Column()
 	email: string;
 
+	@Field()
+	@Column('text', { unique: true })
+	phone: string;
+
+	@Field()
+    @IsDate()
+    @CreateDateColumn()
+	created_date: Date;
+	
 	@OneToOne(type => Card)
     @JoinColumn()
 	card: Card;

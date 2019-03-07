@@ -15,15 +15,21 @@ export class UserResolver {
 	{
 		firstName,
 		lastName,
+		middleName,
 		email,
-		password
+		password,
+		phone,
+		avatar
 	}: RegisterInput): Promise<User> {
 		const hash = await bcrypt.hash(password, 10);
 		return await User.create({
 			firstName,
 			lastName,
+			middleName,
 			email,
-			password: hash
+			password: hash,
+			phone,
+			avatar
 		}).save();
 	}
 }

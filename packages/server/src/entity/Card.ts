@@ -1,4 +1,4 @@
-import {Entity,PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany} from 'typeorm';
+import {Entity,PrimaryGeneratedColumn,Column, CreateDateColumn, UpdateDateColumn, BaseEntity} from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 

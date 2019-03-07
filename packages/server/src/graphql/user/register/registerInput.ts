@@ -13,10 +13,21 @@ export class RegisterInput {
 	lastName: string;
 
 	@Field()
+	@Length(1, 255)
+	middleName: string;
+
+	@Field()
+	@Length(8,11)
+	phone: string;
+
+	@Field()
 	@IsEmail()
 	@IsEmailExist({ message: 'email already exist.' })
 	email: string;
 
 	@Field()
 	password: string;
+
+	@Field()
+	avatar: string;
 }

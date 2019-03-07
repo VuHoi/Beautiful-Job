@@ -1,8 +1,4 @@
 import { createConnection } from 'typeorm';
-import { Card } from '../entity/Card';
-import { User } from '../entity/User';
-import { Post } from '../entity/Post';
-import { UserPost } from '../entity/UserPost';
 export const databaseInitializer = async () => {
 
     return await createConnection({
@@ -13,14 +9,9 @@ export const databaseInitializer = async () => {
         username : process.env.TYPEORM_USERNAME,
         password : process.env.TYPEORM_PASSWORD,
         database : process.env.TYPEORM_DATABASE,
-        entities: [
-            Card,
-            User,
-            Post,
-            UserPost
-        ],
+        entities: [process.env.TYPEORM_ENTITIES],
         logging: JSON.parse(process.env.TYPEORM_LOGGING),
-        synchronize: JSON.parse(process.env.TYPEORM_SYNCHRONIZE),
+        synchronize: JSON.parse(process.env.TYPEORM_SYNCHRONIZE)
     }).then((connection:any) => {
         console.log('Database connection established');
     }) .catch((err: Error) => `Cannot connect to TypeOrm ${err.message}`);

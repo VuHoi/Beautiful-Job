@@ -12,14 +12,22 @@ type Query {
 input RegisterInput {
   firstName: String!
   lastName: String!
+  middleName: String
   email: String!
   password: String!
+  phone:String!
+  avatar:String!
 }
 
 type User {
   id: ID!
   firstName: String!
   lastName: String!
+  middleName: String!
   email: String!
   name: String!
+  role: String
+  avatar: String!
+  isActived: String!
+  phone:String!
 }
