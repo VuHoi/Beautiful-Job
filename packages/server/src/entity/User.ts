@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
+import {
+	BaseEntity,
+	Column,
+	Entity,
+	PrimaryGeneratedColumn,
+	OneToOne,
+	JoinColumn,
+	OneToMany,
+	CreateDateColumn
+} from 'typeorm';
 import { Field, ID, ObjectType, Root } from 'type-graphql';
 import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
 import { IsEmail, IsDate } from 'class-validator';
@@ -29,12 +38,16 @@ export class User extends BaseEntity {
 	avatar: string;
 
 	@Field()
-	@Column('text',{default:'user'})
+	@Column('text', { default: 'user' })
 	role: string;
 
 	@Field()
-	@Column("bool", { default: false })
+	@Column('bool', { default: false })
 	isActived: boolean;
+
+	@Field()
+	@Column('bool', { default: false })
+	isConfirmed: boolean;
 
 	@Column('text', { unique: true })
 	password: string;
@@ -50,20 +63,19 @@ export class User extends BaseEntity {
 	phone: string;
 
 	@Field()
-    @IsDate()
-    @CreateDateColumn()
+	@IsDate()
+	@CreateDateColumn()
 	created_date: Date;
-	
+
 	@OneToOne(type => Card)
-    @JoinColumn()
+	@JoinColumn()
 	card: Card;
-	
+
 	@OneToMany(() => UserPost, userpost => userpost.users)
-    userPost: Promise<UserPost[]>;
+	userPost: Promise<UserPost[]>;
 
 	@Field()
 	name(@Root() parent: User): string {
 		return `${parent.firstName} ${parent.lastName}`;
 	}
-
 }

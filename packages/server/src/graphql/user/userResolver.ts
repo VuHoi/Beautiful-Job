@@ -11,7 +11,7 @@ export class UserResolver {
 	}
 
 	@Mutation(() => User)
-	async register(@Arg('input')
+	async register(@Arg('data')
 	{
 		firstName,
 		lastName,

@@ -3,6 +3,7 @@
 
 type Mutation {
   register(input: RegisterInput!): User!
+  login():User!
 }
 
 type Query {
@@ -26,8 +27,9 @@ type User {
   middleName: String!
   email: String!
   name: String!
-  role: String
+  role: String!
   avatar: String!
-  isActived: String!
+  isActived: boolean!
   phone:String!
+  isConfirmed:boolean!
 }
