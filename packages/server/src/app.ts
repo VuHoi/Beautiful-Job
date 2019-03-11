@@ -10,7 +10,8 @@ import session from 'express-session';
 import { redis } from './redis';
 import connectRedis from 'connect-redis';
 import cors from 'cors';
-const RedisStore = connectRedis(session);
+import { MainContext } from './graphql/types/mainContext';
+
 class App {
 	public app: express.Application;
 	public apolloServer: ApolloServer;
@@ -33,6 +34,7 @@ class App {
 				origin: 'http://localhost:3000'
 			})
 		);
+		const RedisStore = connectRedis(session);
 		this.app.use(
 			session({
 				store: new RedisStore({
@@ -55,10 +57,13 @@ class App {
 		this.apolloServer = new ApolloServer({
 			schema,
 			formatError: formatArgumentValidationError,
-			context: ({ req, res }: any) => ({
-				req,
-				res
-			}),
+			context: ({ req, res }: MainContext) => {
+				const context = {
+					req,
+					res
+				};
+				return context;
+			},
 			validationRules: [
 				// queryComplexity({
 				// 	// The maximum allowed query complexity, queries above this threshold will be rejected
@@ -84,7 +89,7 @@ class App {
 				// }) as any
 			]
 		});
-		this.apolloServer.applyMiddleware({ app: this.app });
+		this.apolloServer.applyMiddleware({ app: this.app, cors: false });
 	};
 }
 

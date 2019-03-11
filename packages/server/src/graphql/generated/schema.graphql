@@ -1,9 +1,31 @@
 # source: http://localhost:5000/graphql
-# timestamp: Tue Jan 22 2019 15:13:29 GMT-0500 (Eastern Standard Time)
+# timestamp: Fri Mar 08 2019 17:48:43 GMT+0700 (Indochina Time)
+
+type Card {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  description: String!
+  done: Boolean!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
 
 type Mutation {
-  register(input: RegisterInput!): User!
-  login():User!
+  register(data: RegisterInput!): User!
+  login(password: String!, email: String!): User
+  logout: Boolean!
+}
+
+type Post {
+  id: ID!
+  created_at: DateTime!
+  content: String!
+  isPublic: Boolean!
 }
 
 type Query {
@@ -13,11 +35,11 @@ type Query {
 input RegisterInput {
   firstName: String!
   lastName: String!
-  middleName: String
+  middleName: String!
+  phone: String!
   email: String!
   password: String!
-  phone:String!
-  avatar:String!
+  avatar: String!
 }
 
 type User {
@@ -25,11 +47,17 @@ type User {
   firstName: String!
   lastName: String!
   middleName: String!
-  email: String!
-  name: String!
-  role: String!
   avatar: String!
-  isActived: boolean!
-  phone:String!
-  isConfirmed:boolean!
+  role: String!
+  isActived: Boolean!
+  isConfirmed: Boolean!
+  email: String!
+  phone: String!
+  created_date: DateTime!
+  name: String!
+}
+
+type UserPost {
+  postId: ID!
+  userId: ID!
 }

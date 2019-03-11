@@ -1,10 +1,21 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import {
+	Arg,
+	Mutation,
+	Query,
+	Resolver,
+	UseMiddleware,
+	Ctx
+} from 'type-graphql';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../../entity/User';
 import { RegisterInput } from './register/registerInput';
+import { isAuth } from '../middleware/isAuth';
+import { logger } from '../middleware/logger';
+import { MainContext } from '../types/mainContext';
 
 @Resolver(User)
 export class UserResolver {
+	@UseMiddleware(isAuth)
 	@Query(() => User)
 	async user(@Arg('email') email: string) {
 		return User.findOne({ email });
