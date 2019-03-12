@@ -13,6 +13,7 @@ import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
 import { IsEmail, IsDate } from 'class-validator';
 import { Card } from './Card';
 import { UserPost } from './UserPost';
+import { isAuth } from '../graphql/middleware/isAuth';
 
 @ObjectType()
 @Entity()

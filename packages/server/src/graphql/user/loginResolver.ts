@@ -23,7 +23,7 @@ export class LoginResolver {
 		if (!user.isConfirmed) {
 			return null;
 		}
-		console.log(ctx.req.session);
+		console.log(ctx.req.session.userId);
 		if (ctx.req.session) {
 			ctx.req.session.userId = user.id;
 		}
