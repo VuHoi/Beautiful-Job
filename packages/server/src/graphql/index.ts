@@ -6,6 +6,7 @@ import { LogoutResolver } from './user/logoutResolver';
 import { ConfirmUserResolver } from './user/confirmUserResolver';
 import { ChangePasswordResolver } from './user/changePasswordResolve';
 import { ForgotPasswordResolver } from './user/forgotPasswordResolve';
+import { MeResolver } from './user/meResolver';
 
 export class GraphQL {
 	public createSchema = async (): Promise<GraphQLSchema> => {
@@ -16,7 +17,8 @@ export class GraphQL {
 				LogoutResolver,
 				ConfirmUserResolver,
 				ChangePasswordResolver,
-				ForgotPasswordResolver
+				ForgotPasswordResolver,
+				MeResolver
 			],
 			authChecker: ({ context: { req } }) => {
 				return !!req.session.userId;
