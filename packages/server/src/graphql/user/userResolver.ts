@@ -1,4 +1,11 @@
-import { Arg, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
+import {
+	Arg,
+	Mutation,
+	Query,
+	Resolver,
+	UseMiddleware,
+	Authorized
+} from 'type-graphql';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../../entity/User';
 import { RegisterInput } from './register/registerInput';
@@ -9,6 +16,7 @@ import { createConfirmationUrl } from '../utils/createConfirmationUrl';
 
 @Resolver(User)
 export class UserResolver {
+	@Authorized()
 	@UseMiddleware(isAuth, logger)
 	@Query(() => User)
 	async user(@Arg('email') email: string) {

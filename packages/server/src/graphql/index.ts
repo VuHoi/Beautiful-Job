@@ -7,7 +7,8 @@ import { ConfirmUserResolver } from './user/confirmUserResolver';
 import { ChangePasswordResolver } from './user/changePasswordResolve';
 import { ForgotPasswordResolver } from './user/forgotPasswordResolve';
 import { MeResolver } from './user/meResolver';
-
+// import { ProfilePictureResolver } from './user/profilePictureResolver';
+import * as jwt from 'jsonwebtoken';
 export class GraphQL {
 	public createSchema = async (): Promise<GraphQLSchema> => {
 		return buildSchema({
@@ -19,9 +20,17 @@ export class GraphQL {
 				ChangePasswordResolver,
 				ForgotPasswordResolver,
 				MeResolver
+				// ProfilePictureResolver
 			],
 			authChecker: ({ context: { req } }) => {
-				return !!req.session.userId;
+				if (req.session.token) {
+					const { userId }: any = jwt.verify(
+						req.session.token,
+						process.env.COOKIE_SECRET
+					);
+					return req.session.userId === userId;
+				}
+				return false;
 			}
 		});
 	};

@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { User } from '../../entity/User';
 import { MainContext } from '../types/mainContext';
-
+import * as jwt from 'jsonwebtoken';
 @Resolver()
 export class LoginResolver {
 	@Mutation(() => User, { nullable: true })
@@ -23,8 +23,15 @@ export class LoginResolver {
 		if (!user.isConfirmed) {
 			return null;
 		}
-
-		ctx.req.session!.userId = user.id;
+		const token = jwt.sign(
+			{
+				userId: user.id
+			},
+			process.env.COOKIE_SECRET,
+			{ expiresIn: '7d' }
+		);
+		ctx.req.session.token = token;
+		ctx.req.session.userId = user.id;
 		return user;
 	}
 }

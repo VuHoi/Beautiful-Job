@@ -1,8 +1,9 @@
-import { Resolver, Mutation, Ctx } from 'type-graphql';
+import { Resolver, Mutation, Ctx, Authorized } from 'type-graphql';
 import { MainContext } from '../types/mainContext';
 
 @Resolver()
 export class LogoutResolver {
+	@Authorized()
 	@Mutation(() => Boolean)
 	async logout(@Ctx() ctx: MainContext): Promise<Boolean> {
 		return new Promise((res, rej) =>
