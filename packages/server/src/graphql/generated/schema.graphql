@@ -1,5 +1,5 @@
 # source: http://localhost:5000/graphql
-# timestamp: Fri Mar 08 2019 17:48:43 GMT+0700 (Indochina Time)
+# timestamp: Thu Mar 14 2019 00:03:27 GMT+0700 (Indochina Time)
 
 type Card {
   id: ID!
@@ -10,15 +10,24 @@ type Card {
   done: Boolean!
 }
 
+input ChangePasswordInput {
+  password: String!
+  token: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
 
 type Mutation {
-  register(data: RegisterInput!): User!
+  register(input: RegisterInput!): User!
   login(password: String!, email: String!): User
   logout: Boolean!
+  confirmUser(token: String!): Boolean!
+  changePassword(data: ChangePasswordInput!): User
+  forgotPassword(email: String!): Boolean!
+  addProfilePicture(picture: Upload!): Boolean!
 }
 
 type Post {
@@ -30,6 +39,7 @@ type Post {
 
 type Query {
   user(email: String!): User!
+  me: User
 }
 
 input RegisterInput {
@@ -41,6 +51,9 @@ input RegisterInput {
   password: String!
   avatar: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   id: ID!
