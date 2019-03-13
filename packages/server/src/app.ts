@@ -7,11 +7,10 @@ import { formatArgumentValidationError } from 'type-graphql';
 import { databaseInitializer } from './initializers/database';
 import * as dotenv from 'dotenv';
 import session from 'express-session';
-import { redis } from './redis';
 import connectRedis from 'connect-redis';
 import cors from 'cors';
 import { MainContext } from './graphql/types/mainContext';
-
+import Redis from 'ioredis';
 class App {
 	public app: express.Application;
 	public apolloServer: ApolloServer;
@@ -35,20 +34,20 @@ class App {
 			})
 		);
 		const RedisStore = connectRedis(session);
+		const redis = new Redis(6379);
 		this.app.use(
 			session({
 				store: new RedisStore({
 					host: 'localhost',
 					port: 6379,
-					client: redis as any,
-					ttl: 260
+					client: redis as any
 				}),
-				name: 'sssss',
-				secret: 'ssss',
+				name: 'qid',
+				secret: 'aslkdfjoiq12312',
 				resave: false,
 				saveUninitialized: false,
 				cookie: {
-					// httpOnly: true,
+					httpOnly: true,
 					secure: false,
 					maxAge: 1000 * 60 * 60 * 24 * 7 * 30 // 7 years
 				}

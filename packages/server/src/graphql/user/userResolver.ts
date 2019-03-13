@@ -1,16 +1,11 @@
-import {
-	Arg,
-	Mutation,
-	Query,
-	Resolver,
-	UseMiddleware,
-	Ctx
-} from 'type-graphql';
+import { Arg, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../../entity/User';
 import { RegisterInput } from './register/registerInput';
 import { isAuth } from '../middleware/isAuth';
 import { logger } from '../middleware/logger';
+import { sendEmail } from '../utils/sendEmail';
+import { createConfirmationUrl } from '../utils/createConfirmationUrl';
 
 @Resolver(User)
 export class UserResolver {
@@ -21,7 +16,7 @@ export class UserResolver {
 	}
 
 	@Mutation(() => User)
-	async register(@Arg('data')
+	async register(@Arg('input')
 	{
 		firstName,
 		lastName,
@@ -32,7 +27,7 @@ export class UserResolver {
 		avatar
 	}: RegisterInput): Promise<User> {
 		const hash = await bcrypt.hash(password, 10);
-		return await User.create({
+		const user = await User.create({
 			firstName,
 			lastName,
 			middleName,
@@ -41,5 +36,7 @@ export class UserResolver {
 			phone,
 			avatar
 		}).save();
+		await sendEmail(email, await createConfirmationUrl(user.id));
+		return user;
 	}
 }

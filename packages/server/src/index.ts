@@ -1,4 +1,5 @@
 import app from './app';
+import { createConfirmationUrl } from './graphql/utils/createConfirmationUrl';
 
 const PORT = process.env.PORT || 5000;
 const URL = process.env.URL || 'http://localhost';
