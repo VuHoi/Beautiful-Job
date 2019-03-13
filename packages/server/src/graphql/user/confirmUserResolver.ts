@@ -13,9 +13,8 @@ export class ConfirmUserResolver {
 		if (!userId) {
 			return false;
 		}
-		console.log(userId);
-		await User.update({ id: userId }, { isConfirmed: false, isActived: true });
-		await redis.del(token);
+		await User.update({ id: userId }, { isConfirmed: true });
+		await redis.del(confirmUserPrefix + token);
 
 		return true;
 	}

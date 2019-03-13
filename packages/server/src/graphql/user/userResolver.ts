@@ -26,7 +26,7 @@ export class UserResolver {
 		phone,
 		avatar
 	}: RegisterInput): Promise<User> {
-		const hash = await bcrypt.hash(password, 10);
+		const hash = await bcrypt.hash(password, 12);
 		const user = await User.create({
 			firstName,
 			lastName,

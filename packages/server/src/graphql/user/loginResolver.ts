@@ -24,10 +24,7 @@ export class LoginResolver {
 			return null;
 		}
 
-		if (ctx.req.session) {
-			ctx.req.session.userId = user.id;
-			console.log(ctx.req.session.userId);
-		}
+		ctx.req.session!.userId = user.id;
 		return user;
 	}
 }
