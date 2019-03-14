@@ -1,5 +1,5 @@
 ## Why?
-I just started to learn Angular and noticed that having a full-stack repo supporting TypeScript in both server and client side is would be great idea. It helps me to understand better how TypeScript is compiled and put lots of configurations together for a better development experience.
+I just started to learn React and noticed that having a full-stack repo supporting TypeScript in both server and client side is would be great idea. It helps me to understand better how TypeScript is compiled and put lots of configurations together for a better development experience.
 
 ## Support
 
