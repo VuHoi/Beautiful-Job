@@ -13,15 +13,15 @@ const styles = (theme: Theme) =>
 export interface Props extends WithStyles<typeof styles> { }
 
 
-function Footer(props: Props) {
+function Message(props: Props) {
     const { classes } = props;
    
     return (
         <div>Hello</div>
     );
 };
-Footer.propTypes = {
+Message.propTypes = {
     classes: PropTypes.object.isRequired,
 } as any;
 
-export default withStyles(styles)(Footer);
+export default withStyles(styles)(Message);
