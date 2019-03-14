@@ -10,9 +10,9 @@ import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/s
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DoneIcon from '@material-ui/icons/Done';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { Button, List, ListItem, ListItemIcon, ListItemText, Divider, Drawer } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import { Button, List, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core';
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -37,6 +37,10 @@ const styles = (theme: Theme) =>
         menuButton: {
             marginLeft: -12,
             marginRight: 20,
+            // display: 'block',
+            // [theme.breakpoints.up('sm')]: {
+            //     display: 'none',
+            // },
         },
         title: {
             display: 'none',
@@ -107,14 +111,14 @@ function Navigation(props: Props) {
     const sideList = (
         <div className={classes.list}>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Home', 'You can', 'About', 'Contact'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <ArrowRightAlt />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            {/* <Divider />
             <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}>
@@ -122,7 +126,7 @@ function Navigation(props: Props) {
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
         </div>
     );
     return (
@@ -170,6 +174,7 @@ function Navigation(props: Props) {
                         </div>
                         <InputBase
                             placeholder="Tên đăng nhập"
+                            type="text"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
@@ -182,6 +187,7 @@ function Navigation(props: Props) {
                         </div>
                         <InputBase
                             placeholder="Mật khẩu"
+                            type="password"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
