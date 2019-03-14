@@ -5,17 +5,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import DoneIcon from '@material-ui/icons/Done';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import { Button, List, ListItem, ListItemIcon, ListItemText, Divider, Drawer } from '@material-ui/core';
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -25,6 +22,18 @@ const styles = (theme: Theme) =>
         grow: {
             flexGrow: 1,
         },
+        button: {
+            margin: theme.spacing.unit,
+            fontSize: '1em',
+            padding: '10px',
+            display: 'none',
+            [theme.breakpoints.up('sm')]: {
+                display: 'block',
+            },
+        },
+        list: {
+            width: 250,
+        },
         menuButton: {
             marginLeft: -12,
             marginRight: 20,
@@ -33,6 +42,12 @@ const styles = (theme: Theme) =>
             display: 'none',
             [theme.breakpoints.up('sm')]: {
                 display: 'block',
+            },
+        },
+        account:{
+            display: 'block',
+            [theme.breakpoints.up('sm')]: {
+                display: 'none',
             },
         },
         search: {
@@ -45,9 +60,11 @@ const styles = (theme: Theme) =>
             marginRight: theme.spacing.unit * 2,
             marginLeft: 0,
             width: '100%',
+            display: 'none',
             [theme.breakpoints.up('sm')]: {
                 marginLeft: theme.spacing.unit * 3,
                 width: 'auto',
+                display: "block"
             },
         },
         searchIcon: {
@@ -58,9 +75,10 @@ const styles = (theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            color: 'white'
         },
         inputRoot: {
-            color: 'inherit',
+            color: 'white',
             width: '100%',
         },
         inputInput: {
@@ -74,152 +92,119 @@ const styles = (theme: Theme) =>
                 width: 200,
             },
         },
-        sectionDesktop: {
-            display: 'none',
-            [theme.breakpoints.up('md')]: {
-                display: 'flex',
-            },
-        },
-        sectionMobile: {
-            display: 'flex',
-            [theme.breakpoints.up('md')]: {
-                display: 'none',
-            },
-        },
+
     });
 
 export interface Props extends WithStyles<typeof styles> { }
 
 
-function Navigation(props:Props) {
+function Navigation(props: Props) {
     const { classes } = props;
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<HTMLElement | null>(null);
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+    const [left, setLeft] = useState<boolean>(false);
+    const toggleDrawer = (open: boolean) => () => {
+        setLeft(open);
     };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
-
-    const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-
-
-
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        </Menu>
+    const sideList = (
+        <div className={classes.list}>
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+        </div>
     );
-
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMobileMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMobileMenuClose}>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem onClick={handleMobileMenuClose}>
-                <IconButton color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton color="inherit">
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
-    
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton className={classes.menuButton} color="secondary" aria-label="Open drawer">
+                    <IconButton onClick={toggleDrawer(true)} className={classes.menuButton} color="secondary" aria-label="Open drawer">
                         <MenuIcon />
                     </IconButton>
+                    <Drawer open={left} onClose={toggleDrawer(false)}>
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            onClick={toggleDrawer(false)}
+                            onKeyDown={toggleDrawer(false)}
+                        >
+                            {sideList}
+                        </div>
+                    </Drawer>
                     <Typography className={classes.title} variant="h6" color="secondary" noWrap>
                         Beautiful Job
-            </Typography>
+                     </Typography>
+                    <div className={classes.grow} />
+                    <Button color="secondary" className={classes.button}>
+                        Home
+                     </Button>
+                    <div className={classes.grow} />
+                    <Button color="secondary" className={classes.button}>
+                        You can
+                     </Button>
+                    <div className={classes.grow} />
+                    <Button color="secondary" className={classes.button}>
+                        About
+                     </Button>
+                    <div className={classes.grow} />
+                    <Button color="secondary" className={classes.button}>
+                        Contact
+                     </Button>
+                    <div className={classes.grow} />
+                    <div className={classes.grow} />
+                    <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
-                            <SearchIcon />
+                            <AccountCircle />
                         </div>
                         <InputBase
-                            placeholder="Search…"
+                            placeholder="Tên đăng nhập"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
                         />
                     </div>
-                    <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={17} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <DoneIcon />
+                        </div>
+                        <InputBase
+                            placeholder="Mật khẩu"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                        />
                     </div>
-                    <div className={classes.sectionMobile}>
-                        <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
-                            <MoreIcon />
-                        </IconButton>
-                    </div>
+                    <Button variant="outlined" color="secondary" className={classes.button}>
+                        Đăng nhập
+                    </Button>
+                    <IconButton className={classes.account}
+                        aria-haspopup="true"
+                        color="secondary"
+                    >
+                        <AccountCircle />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
-            {renderMenu}
-            {renderMobileMenu}
+
         </div>
     );
 };
 Navigation.propTypes = {
     classes: PropTypes.object.isRequired,
-  } as any;
+} as any;
 
 export default withStyles(styles)(Navigation);
