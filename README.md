@@ -31,4 +31,4 @@ I just started to learn React and noticed that having a full-stack repo supporti
 
 
 ## License
-MIT license, Copyright (c) 2018 Hoi Vu.
+MIT license, Copyright (c) 2019 Hoi Vu.
