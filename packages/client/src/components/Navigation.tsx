@@ -22,6 +22,9 @@ const styles = (theme: Theme) =>
         grow: {
             flexGrow: 1,
         },
+        grow3:{
+            flexGrow: 3,
+        },
         button: {
             margin: theme.spacing.unit,
             fontSize: '1em',
@@ -165,9 +168,7 @@ function Navigation(props: Props) {
                     <Button color="secondary" className={classes.button}>
                         Contact
                      </Button>
-                    <div className={classes.grow} />
-                    <div className={classes.grow} />
-                    <div className={classes.grow} />
+                    <div className={classes.grow3} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <AccountCircle />
