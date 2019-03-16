@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import hand from '../images/hand.jpg'
+import hand from '../../images/hand.jpg'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import { footerColor } from '../constants/colors';
+import { footerColor } from '../../constants/colors';
 import { Link, Typography } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import StarIcon from '@material-ui/icons/Star';
-import { github } from '../images/svg';
+import { github } from '../../images/svg';
 const styles = (theme: Theme) =>
     createStyles({
         title: {
@@ -37,11 +37,11 @@ const Background_Footer = styled.div`
             flex-direction: row;
             justify-content: space-between;
             >div {
+                margin-top:50px;
                 height:400px;
                 padding:30px;
                 width:100%;
                 display: flex;
-                /* justify-content:center; */
                 color:white;
                 flex-direction: column;
             }

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageSlide from '../images/imageslide.jpg';
+import ImageSlide from '../../images/imageslide.jpg';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import { footerColor } from '../constants/colors';
+import { footerColor } from '../../constants/colors';
 import { Typography, Button } from '@material-ui/core';
 
 export interface Props extends WithStyles<typeof styles> { }
