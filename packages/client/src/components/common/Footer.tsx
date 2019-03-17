@@ -68,7 +68,7 @@ function Footer(props: Props) {
         'Tiếp viên hàng không',
         'Xem thêm'
     ].map((text: string, index: number) => {
-        return <div>
+        return <div key={index}>
             <Link variant="h6" color="secondary" >
                 {text}
             </Link>
@@ -80,7 +80,7 @@ function Footer(props: Props) {
         'About',
         'Contact'
     ].map((text: string, index: number) => {
-        return <div>
+        return <div key={index}>
             <Link variant="h6" color="secondary" >
                 {text}
             </Link>
