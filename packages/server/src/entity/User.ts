@@ -6,6 +6,7 @@ import {
 	OneToOne,
 	JoinColumn,
 	OneToMany,
+	ManyToOne,
 	CreateDateColumn
 } from 'typeorm';
 import { Field, ID, ObjectType, Root } from 'type-graphql';
@@ -13,6 +14,7 @@ import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
 import { IsEmail, IsDate } from 'class-validator';
 import { Card } from './Card';
 import { UserPost } from './UserPost';
+import { Company } from './Company';
 
 @ObjectType()
 @Entity()
@@ -73,6 +75,10 @@ export class User extends BaseEntity {
 
 	@OneToMany(() => UserPost, userpost => userpost.users)
 	userPost: Promise<UserPost[]>;
+
+	@ManyToOne(type => Company)
+	@JoinColumn()
+	company: Company;
 
 	@Field()
 	name(@Root() parent: User): string {
