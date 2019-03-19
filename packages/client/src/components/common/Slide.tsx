@@ -1,23 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ImageSlide from '../../images/imageslide.jpg';
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import { footerColor } from '../../constants/colors';
 import { Typography, Button } from '@material-ui/core';
+import { theme } from '../../styles/theme';
 
-export interface Props extends WithStyles<typeof styles> { }
-const styles = (theme: Theme) =>
-    createStyles({
-        button: {
-            margin: theme.spacing.unit,
-            padding: '15px'
-        }
-
-    });
-
-const height=700;
-
+const height = 700;
+const ButtonStyle = styled(({ ...otherProps }) => <Button {...otherProps} />)`
+        margin: ${theme.spacing.unit};
+        padding: 15px;
+`;
 const Image = styled.img`
     width:100%;
     height:${height}px;
@@ -32,7 +24,7 @@ const Background_Slide = styled.div`
         width:60%;
         opacity:0.7;
         border-right: 200px solid transparent;
-        border-bottom: ${height}px solid ${ footerColor};
+        border-bottom: ${height}px solid ${footerColor};
        >div {
             width:80%;
             margin:0 10%;
@@ -44,8 +36,8 @@ const Background_Slide = styled.div`
        }
     }
 `;
-function Slide(props: Props) {
-    const { classes } = props;
+function Slide() {
+
 
     return (
         <Background_Slide >
@@ -64,16 +56,14 @@ function Slide(props: Props) {
                         Thông tin chính xác
                      </Typography>
                     <br />
-                    <Button variant="outlined" color="secondary" className={classes.button}>
+                    <ButtonStyle variant="outlined" color="secondary" >
                         Kết nối ngay
-                  </Button>
+                  </ButtonStyle>
                 </div>
             </div>
         </Background_Slide>
     );
 };
-Slide.propTypes = {
-    classes: PropTypes.object.isRequired,
-} as any;
 
-export default withStyles(styles)(Slide);
+
+export default Slide;
