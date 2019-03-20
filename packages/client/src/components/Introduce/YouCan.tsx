@@ -1,31 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import { Typography, Card, CardContent, CardActions, Button } from '@material-ui/core';
 import styled from 'styled-components';
-
-
-const styles = (theme: Theme) =>
-    createStyles({
-        card: {
-            minWidth: '33%',
-        },
-        bullet: {
-            display: 'inline-block',
-            margin: '0 2px',
-            transform: 'scale(0.8)',
-        },
-        title: {
-            fontSize: 18,
-        },
-        right: {
-            display: "flex",
-            justifyContent: "flex-end"
-        },
-
-    });
-
-export interface Props extends WithStyles<typeof styles> { }
+import { CardProps } from '@material-ui/core/Card';
+import { TypographyProps } from '@material-ui/core/Typography';
+import { CardActionsProps } from '@material-ui/core/CardActions';
 
 const Container = styled.div`
     display:flex;
@@ -45,9 +23,25 @@ const ContainerCard = styled(Div)`
         margin:10px;
     }
 `;
+const StyledCard = styled((props: CardProps) => (
+    <Card  {...props} />
+))`
+    min-width: 33%;
+`
 
-function YouCan(props: Props) {
-    const { classes } = props;
+const StyledTypography = styled((props: TypographyProps) => (
+    <Typography  {...props} />
+))`
+    font-size: 18;
+`
+
+const StyledCardActions = styled((props: CardActionsProps) => (
+    <CardActions  {...props} />
+))`
+    display: flex;
+    justify-content: flex-end;
+`
+function YouCan() {
     const cards = [
         {
             title: 'Kết nối công việc',
@@ -64,19 +58,19 @@ function YouCan(props: Props) {
 
     ].map((item,index) =>
         <div key={index}>
-            <Card className={classes.card}>
+            <StyledCard>
                 <CardContent>
-                    <Typography className={classes.title} color="inherit" gutterBottom>
+                    <StyledTypography  color="inherit" gutterBottom>
                         {item.title}
-                    </Typography>
-                    <Typography className={classes.title} variant="body1" color="textSecondary" gutterBottom>
+                    </StyledTypography>
+                    <StyledTypography  variant="body1" color="textSecondary" gutterBottom>
                         {item.description}
-                    </Typography>
+                    </StyledTypography>
                 </CardContent>
-                <CardActions className={classes.right}>
+                <StyledCardActions>
                     <Button variant="outlined" size="small">Learn More</Button>
-                </CardActions>
-            </Card>
+                </StyledCardActions>
+            </StyledCard>
         </div>)
     return (
         <div>
@@ -101,8 +95,6 @@ function YouCan(props: Props) {
         </div>
     );
 };
-YouCan.propTypes = {
-    classes: PropTypes.object.isRequired,
-} as any;
 
-export default withStyles(styles)(YouCan);
+
+export default YouCan;

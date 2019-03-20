@@ -5,5 +5,8 @@ export const theme = createMuiTheme({
 	palette: {
 		primary: { main: mainColor },
 		secondary: { main: secondaryColor }
+	},
+	spacing: {
+		unit: 8
 	}
 });

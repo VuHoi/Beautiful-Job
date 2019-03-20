@@ -56,7 +56,7 @@ function Slide() {
                         Thông tin chính xác
                      </Typography>
                     <br />
-                    <ButtonStyle variant="outlined" color="secondary" >
+                    <ButtonStyle variant="outlined" color="secondary"  >
                         Kết nối ngay
                   </ButtonStyle>
                 </div>

@@ -206,7 +206,6 @@ function Navigation(props: Props) {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-
         </div>
     );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import hand from '../../images/hand.jpg'
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import { footerColor } from '../../constants/colors';
 import { Link, Typography } from '@material-ui/core';
@@ -10,12 +9,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import StarIcon from '@material-ui/icons/Star';
 import { github } from '../../images/svg';
-const styles = (theme: Theme) =>
-    createStyles({
-        title: {
-            fontStyle: 'bold'
-        }
-    });
+
 const Image = styled.img`
     width: 100%;
     height: 400px;
@@ -55,11 +49,10 @@ const About = styled.div`
     width:70%;
     color:yellow;
 `;
-export interface Props extends WithStyles<typeof styles> { }
 
 
-function Footer(props: Props) {
-    const { classes } = props;
+function Footer() {
+    
     const CategoriesJob = [
         'Công nghệ thông tin',
         'Kết toán',
@@ -87,7 +80,6 @@ function Footer(props: Props) {
         </div>;
     });
     const ContactFooter = <div>
-        <label></label>
         <Typography variant="h6" color="secondary">
             <LocationOnIcon />  333 Tân Lập Dĩ An Bình Dương
       </Typography>
@@ -115,7 +107,7 @@ function Footer(props: Props) {
                 <div >
                     <div>
                         <Link
-                            variant="h4" color="secondary" className={classes.title}>
+                            variant="h4" color="secondary" >
                             Gợi ý công việc
                          </Link>
                         <br />
@@ -123,21 +115,21 @@ function Footer(props: Props) {
                     </div>
                     <div>
                         <Link
-                            variant="h4" color="secondary" className={classes.title}>
+                            variant="h4" color="secondary" >
                             Lối tắt
                          </Link>
                         <br />
                         {Menus}</div>
                     <div>
                         <Link
-                            variant="h4" color="secondary" className={classes.title}>
+                            variant="h4" color="secondary" >
                             Thông tin
                          </Link>
                         <br />
                         {ContactFooter}</div>
                     <div>
                         <Link
-                            variant="h4" color="secondary" className={classes.title}>
+                            variant="h4" color="secondary" >
                             Giới thiệu chung
                          </Link>
                         <br />
@@ -151,4 +143,4 @@ Footer.propTypes = {
     classes: PropTypes.object.isRequired,
 } as any;
 
-export default withStyles(styles)(Footer);
+export default Footer;

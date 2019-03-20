@@ -1,22 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core';
 import styled from 'styled-components';
+import { PaperProps } from '@material-ui/core/Paper';
+import { theme } from '../../styles/theme';
 
-
-const styles = (theme: Theme) =>
-    createStyles({
-        root: {
-            ...theme.mixins.gutters(),
-            paddingTop: theme.spacing.unit * 2,
-            paddingBottom: theme.spacing.unit * 2,
-            width: '70%'
-        }
-    });
-
-export interface Props extends WithStyles<typeof styles> { }
-
+const StyledPaper = styled((props: PaperProps) => (
+    <Paper  {...props} />
+))`
+    padding-top: ${theme.spacing.unit * 2}px;
+    padding-bottom: ${theme.spacing.unit * 2}px;
+    width: 70%;
+    ${theme.mixins.gutters()}
+`;
 const Container = styled.div`
         position: relative;
         display:flex;
@@ -29,14 +24,11 @@ const Container = styled.div`
             justify-content:space-between;
         }
 `
-
-function Introduce(props: Props) {
-    const { classes } = props;
-
+function Introduce() {
+    
     return (
         <Container>
-
-            <Paper className={classes.root} elevation={1}>
+            <StyledPaper  elevation={1}>
                 <div>
                     <Typography variant="h5" component="h3">
                         This is a sheet of paper.
@@ -61,12 +53,10 @@ function Introduce(props: Props) {
                         Paper can be used to build surface or other elements for your application.
                 </Typography>
                 </div>
-            </Paper>
+            </StyledPaper>
         </Container>
     );
 };
-Introduce.propTypes = {
-    classes: PropTypes.object.isRequired,
-} as any;
 
-export default withStyles(styles)(Introduce);
+
+export default Introduce;
