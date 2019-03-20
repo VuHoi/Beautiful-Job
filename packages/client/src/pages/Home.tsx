@@ -6,7 +6,7 @@ import Introduce from '../components/Introduce/Introduce';
 import YouCan from '../components/Introduce/YouCan';
 import Index from '../components/Introduce/Index';
 import About from '../components/Introduce/About';
-
+import Contact from '../components/Introduce/Contact';
 const Home = () => {
 	const [text] = useState<string | null>('Hello World');
 	return (
@@ -17,6 +17,7 @@ const Home = () => {
 			<YouCan />
 			<Index/>
 			<About/>
+			<Contact/>
 			<Footer />
 		</div>
 	);

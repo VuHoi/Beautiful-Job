@@ -18,7 +18,7 @@ const ContainerCard = styled(Div)`
     display:flex;
     justify-content:space-between;
     flex-direction:row;
-    margin:${props => props.marintop}px 15% 0 10%;
+    margin:${props => props.marintop}px 10% 0 10%;
     >div{
         margin:10px;
     }
@@ -26,7 +26,7 @@ const ContainerCard = styled(Div)`
 const StyledCard = styled((props: CardProps) => (
     <Card  {...props} />
 ))`
-    min-width: 33%;
+    min-width: 33.3%;
 `
 
 const StyledTypography = styled((props: TypographyProps) => (

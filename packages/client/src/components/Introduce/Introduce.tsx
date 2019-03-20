@@ -6,12 +6,12 @@ import { theme } from '../../styles/theme';
 
 const StyledPaper = styled((props: PaperProps) => (
     <Paper  {...props} />
-))`
-    padding-top: ${theme.spacing.unit * 2}px;
-    padding-bottom: ${theme.spacing.unit * 2}px;
-    width: 70%;
-    ${theme.mixins.gutters()}
-`;
+    ))`
+        padding-top: ${theme.spacing.unit * 2}px;
+        padding-bottom: ${theme.spacing.unit * 2}px;
+        width: 70%;
+        ${theme.mixins.gutters()}
+    `;
 const Container = styled.div`
         position: relative;
         display:flex;
@@ -25,10 +25,10 @@ const Container = styled.div`
         }
 `
 function Introduce() {
-    
+
     return (
         <Container>
-            <StyledPaper  elevation={1}>
+            <StyledPaper elevation={1}>
                 <div>
                     <Typography variant="h5" component="h3">
                         This is a sheet of paper.

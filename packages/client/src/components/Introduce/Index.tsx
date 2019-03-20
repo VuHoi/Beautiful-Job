@@ -4,7 +4,8 @@ import ProgressBar from './ProgressBar';
 const Container = styled.div`
 display:flex;
 justify-content:center;
-
+height:500px;
+align-items:center;
 `;
 
 

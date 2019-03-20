@@ -5,7 +5,7 @@ import { footerColor } from '../../constants/colors';
 import { Typography, Button } from '@material-ui/core';
 import { theme } from '../../styles/theme';
 
-const height = 700;
+const height = 900;
 const ButtonStyle = styled(({ ...otherProps }) => <Button {...otherProps} />)`
         margin: ${theme.spacing.unit};
         padding: 15px;
@@ -32,7 +32,8 @@ const Background_Slide = styled.div`
             flex-direction:column;
             justify-content: center;
             align-items:center;
-            height: 600px;
+            height: ${height}px;
+            text-align:center;
        }
     }
 `;

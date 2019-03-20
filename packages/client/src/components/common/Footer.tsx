@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import hand from '../../images/hand.jpg'
 import styled from 'styled-components';
 import { footerColor } from '../../constants/colors';
@@ -139,8 +138,7 @@ function Footer() {
         </Background_Footer>
     );
 };
-Footer.propTypes = {
-    classes: PropTypes.object.isRequired,
-} as any;
+
+
 
 export default Footer;
