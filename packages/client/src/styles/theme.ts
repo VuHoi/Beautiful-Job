@@ -1,9 +1,12 @@
 import { createMuiTheme } from '@material-ui/core';
-import { blue, purple } from '@material-ui/core/colors';
+import { mainColor, secondaryColor } from '../constants/colors';
 
 export const theme = createMuiTheme({
 	palette: {
-		primary: purple,
-		secondary: blue
+		primary: { main: mainColor },
+		secondary: { main: secondaryColor }
+	},
+	spacing: {
+		unit: 8
 	}
 });

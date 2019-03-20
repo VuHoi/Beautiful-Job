@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from './Routes';
+import Routes from './common/Routes';
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { theme } from '../styles/theme';
 
