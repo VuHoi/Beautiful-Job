@@ -23,6 +23,7 @@ export class GraphQL {
 				ProfilePictureResolver
 			],
 			authChecker: ({ context: { req } }) => {
+				console.log(req.session.token);
 				if (req.session.token) {
 					const { userId }: any = jwt.verify(
 						req.session.token,
