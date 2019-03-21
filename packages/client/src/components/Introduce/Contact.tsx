@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { TextField, Typography, Button } from '@material-ui/core';
 import { TypographyProps } from '@material-ui/core/Typography';
 import { ButtonProps } from '@material-ui/core/Button';
+import { CurrentUser_QUERY } from '../../querys/home';
+import { Query, Mutation } from 'react-apollo';
+import { Login_MUTATION } from '../../mutations/home';
 const Container = styled.div`
     display:flex;
     justify-content:center;
@@ -35,12 +38,27 @@ const StyledContainerCenter = styled.div`
     text-align:center;
     width:100%;
   `
+const currentUser = <Query query={CurrentUser_QUERY}>
+    {({ data }) => {
+        console.log(data);
+        return <div></div>
+    }}
+</Query>
+const loginUser = <Mutation
+    mutation={Login_MUTATION}>
+    {mutate => <button onClick={() =>{ 
+        mutate().then(a=>console.log(a))
+        }}>delete listing</button>}
+</Mutation>
 function Contact() {
     return (
         <Container>
+             {loginUser}
             <StyledTypography variant="h5" color="inherit">
                 Liên hệ với chúng tôi
-              </StyledTypography>
+               
+                {currentUser}
+            </StyledTypography>
             <Form noValidate autoComplete="off">
                 <TextField
                     id="name"
