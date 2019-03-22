@@ -4,8 +4,7 @@ import { TextField, Typography, Button } from '@material-ui/core';
 import { TypographyProps } from '@material-ui/core/Typography';
 import { ButtonProps } from '@material-ui/core/Button';
 import { CurrentUser_QUERY } from '../../querys/home';
-import { Query, Mutation } from 'react-apollo';
-import { Login_MUTATION } from '../../mutations/home';
+import { Query } from 'react-apollo';
 const Container = styled.div`
     display:flex;
     justify-content:center;
@@ -19,7 +18,6 @@ const Form = styled.form`
     justify-content:center;
     flex-direction:column;
     width:450px;
-   
 `;
 const StyledTypography = styled((props: TypographyProps) => (
     <Typography  {...props} />
@@ -44,16 +42,15 @@ const currentUser = <Query query={CurrentUser_QUERY}>
         return <div></div>
     }}
 </Query>
-const loginUser = <Mutation
-    mutation={Login_MUTATION}>
-    {mutate => <button onClick={() =>{ 
-        mutate().then(a=>console.log(a))
-        }}>delete listing</button>}
-</Mutation>
+// const loginUser = <Mutation
+//     mutation={Login_MUTATION}>
+//     {mutate => <button onClick={() =>{ 
+//         mutate().then(a=>console.log(a))
+//         }}>delete listing</button>}
+// </Mutation>
 function Contact() {
     return (
         <Container>
-             {loginUser}
             <StyledTypography variant="h5" color="inherit">
                 Liên hệ với chúng tôi
                

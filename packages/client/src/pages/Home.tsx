@@ -7,13 +7,12 @@ import YouCan from '../components/Introduce/YouCan';
 import Index from '../components/Introduce/Index';
 import About from '../components/Introduce/About';
 import Contact from '../components/Introduce/Contact';
-import { useStore } from 'easy-peasy';
 import Login from '../components/common/Login';
+import Register from '../components/common/Register';
 
 
 const Home = () => {
-	const IsOpen:number = useStore((state:any) => state.homeStore.IsOpenLogin)
-	console.log(IsOpen);
+
 	
 	return (
 		<div>
@@ -26,6 +25,7 @@ const Home = () => {
 			<Contact/>
 			<Footer />
 			<Login/>
+			<Register/>
 		</div>
 	);
 };

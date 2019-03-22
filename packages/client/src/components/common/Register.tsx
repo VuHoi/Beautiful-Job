@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextField, Typography, Button, Dialog, withStyles, IconButton } from '@material-ui/core';
+import { TextField,Button, Dialog} from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import { useStore, useActions } from 'easy-peasy';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import CloseIcon from '@material-ui/icons/Close';
+import { DialogTitle, DialogContent } from '../../styles/globalStyleMaterial';
 const Container = styled.div`
     display:flex;
     justify-content:center;
@@ -32,88 +30,96 @@ const StyledContainerCenter = styled.div`
     width:100%;
   `
 
-const DialogTitle = withStyles(theme => ({
-    root: {
-      margin: 0,
-      padding: theme.spacing.unit * 2,
-      display:'flex',
-      justifyContent:'center',
-      fontWeight:900
-    },
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing.unit,
-      top: theme.spacing.unit,
-      color: theme.palette.grey[500],
-    },
-  }))((props:any) => {
-    const { children, classes, onClose } = props;
-    return (
-      <MuiDialogTitle disableTypography className={classes.root}>
-        <Typography variant="h6">{children}</Typography>
-        {onClose ? (
-          <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-    );
-  });
-  
-  const DialogContent = withStyles(theme => ({
-    root: {
-      margin: 0,
-      padding: theme.spacing.unit * 2,
-    },
-  }))(MuiDialogContent);
-  
- 
+const StyledTextField = styled((props) => (
+    <TextField  {...props} />
+))`
+       margin:10px !important;
+    `;
+
+const DivHorizontal = styled.div`
+    display:flex;
+    justify-content:space-between;
+ `
 function Register() {
-    const OpenLogin = useActions((dispatch:any) => dispatch.homeStore.setOpenLoginDialog);
+    const OpenRegister = useActions((dispatch: any) => dispatch.homeStore.setOpenRegisterDialog);
     const handleClose = () => {
-        OpenLogin(false);
+        OpenRegister(false);
     }
-    const IsOpen:boolean = useStore((state:any) => state.homeStore.IsOpenLogin)
+    const IsOpen = useStore((state: any) => state.homeStore.IsOpenRegister);
+    console.log(IsOpen)
     return (
         <Dialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
             open={IsOpen}
         >
-         <DialogTitle id="customized-dialog-title" onClose={handleClose} >
-           Đăng nhập
+            <DialogTitle id="customized-dialog-title" onClose={handleClose} >
+             Đăng kí
           </DialogTitle>
-          <DialogContent>
-            <Container>
-                
-                <Form noValidate autoComplete="off">
-                    <TextField
-                        id="name"
-                        label="Tên đăng nhập"
-                        type="text"
-                        name="name"
-                        fullWidth
-                        autoComplete="username"
-                        margin="normal"
-                        variant="outlined"
-                    />
-                   
-                    <TextField
-                        id="password"
-                        label="Mật khẩu"
-                        type="password"
-                        name="password"
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                    />
-                    <StyledContainerCenter>
-                     <StyledSubmit variant="outlined" color="primary" >
-                           Đăng nhập
-                     </StyledSubmit>
-                    </StyledContainerCenter>
-                </Form>
-            </Container>
+            <DialogContent>
+                <Container>
+                    <Form noValidate autoComplete="off">
+                        <DivHorizontal>
+                            <StyledTextField
+                                id="ho"
+                                label="Họ"
+                                type="text"
+                                name="ho"
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <StyledTextField
+                                id="tendem"
+                                label="Tên đệm"
+                                type="text"
+                                name="tendem"
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <StyledTextField
+                                id="ten"
+                                label="Tên"
+                                type="text"
+                                name="ten"
+                                margin="normal"
+                                variant="outlined"
+                            />
+                        </DivHorizontal>
+                        <TextField
+                            id="email"
+                            label="Email"
+                            type="text"
+                            name="email"
+                            fullWidth
+                            autoComplete="email"
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <TextField
+                            id="_password"
+                            label="Mật khẩu"
+                            type="password"
+                            name="_password"
+                            fullWidth
+                            margin="normal"
+                            variant="outlined"
+                        />
+                         <TextField
+                            id="_password_"
+                            label="Nhập lại mật khẩu"
+                            type="password"
+                            name="_password_"
+                            fullWidth
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <StyledContainerCenter>
+                            <StyledSubmit variant="outlined" color="primary" onClick={handleClose} >
+                                Đăng kí
+                        </StyledSubmit>
+                        </StyledContainerCenter>
+                    </Form>
+                </Container>
             </DialogContent>
         </Dialog>
     );
