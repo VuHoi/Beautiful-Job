@@ -10,15 +10,12 @@ const Container = styled.div`
     align-items:center;
     flex-direction:column;
 `;
-
 const Form = styled.form`
     display:flex;
     justify-content:center;
     flex-direction:column;
     width:450px;
 `;
-
-
 const StyledSubmit = styled((props: ButtonProps) => (
     <Button  {...props} />
 ))`
@@ -29,13 +26,11 @@ const StyledContainerCenter = styled.div`
     text-align:center;
     width:100%;
   `
-
 const StyledTextField = styled((props) => (
     <TextField  {...props} />
 ))`
        margin:10px !important;
     `;
-
 const DivHorizontal = styled.div`
     display:flex;
     justify-content:space-between;
