@@ -7,8 +7,14 @@ import YouCan from '../components/Introduce/YouCan';
 import Index from '../components/Introduce/Index';
 import About from '../components/Introduce/About';
 import Contact from '../components/Introduce/Contact';
+import { useStore } from 'easy-peasy';
+import Login from '../components/common/Login';
+
+
 const Home = () => {
-	const [text] = useState<string | null>('Hello World');
+	const IsOpen:number = useStore((state:any) => state.homeStore.IsOpenLogin)
+	console.log(IsOpen);
+	
 	return (
 		<div>
 			<Navigation />
@@ -19,6 +25,7 @@ const Home = () => {
 			<About/>
 			<Contact/>
 			<Footer />
+			<Login/>
 		</div>
 	);
 };
