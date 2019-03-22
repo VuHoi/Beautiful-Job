@@ -7,8 +7,13 @@ import YouCan from '../components/Introduce/YouCan';
 import Index from '../components/Introduce/Index';
 import About from '../components/Introduce/About';
 import Contact from '../components/Introduce/Contact';
+import Login from '../components/common/Login';
+import Register from '../components/common/Register';
+
+
 const Home = () => {
-	const [text] = useState<string | null>('Hello World');
+
+	
 	return (
 		<div>
 			<Navigation />
@@ -19,6 +24,8 @@ const Home = () => {
 			<About/>
 			<Contact/>
 			<Footer />
+			<Login/>
+			<Register/>
 		</div>
 	);
 };

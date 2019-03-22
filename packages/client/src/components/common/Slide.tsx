@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { footerColor } from '../../constants/colors';
 import { Typography, Button } from '@material-ui/core';
 import { theme } from '../../styles/theme';
+import { useActions } from 'easy-peasy';
 
 const height = 900;
 const ButtonStyle = styled(({ ...otherProps }) => <Button {...otherProps} />)`
@@ -38,7 +39,10 @@ const Background_Slide = styled.div`
     }
 `;
 function Slide() {
-
+    const OpenRegister = useActions((dispatch: any) => dispatch.homeStore.setOpenRegisterDialog);
+const OpenDialogRegister = ()=>{
+    OpenRegister(true);
+}
 
     return (
         <Background_Slide >
@@ -57,7 +61,7 @@ function Slide() {
                         Thông tin chính xác
                      </Typography>
                     <br />
-                    <ButtonStyle variant="outlined" color="secondary"  >
+                    <ButtonStyle variant="outlined" color="secondary" onClick={OpenDialogRegister}  >
                         Kết nối ngay
                   </ButtonStyle>
                 </div>

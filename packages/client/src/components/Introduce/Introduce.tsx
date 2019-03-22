@@ -3,10 +3,9 @@ import { Paper, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import { PaperProps } from '@material-ui/core/Paper';
 import { theme } from '../../styles/theme';
-
 const StyledPaper = styled((props: PaperProps) => (
     <Paper  {...props} />
-    ))`
+))`
         padding-top: ${theme.spacing.unit * 2}px;
         padding-bottom: ${theme.spacing.unit * 2}px;
         width: 70%;
@@ -25,7 +24,7 @@ const Container = styled.div`
         }
 `
 function Introduce() {
-
+ 
     return (
         <Container>
             <StyledPaper elevation={1}>

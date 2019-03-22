@@ -13,6 +13,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import HomeIcon from '@material-ui/icons/Home';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import { Button, List, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core';
+import { useActions } from 'easy-peasy';
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -111,6 +112,7 @@ function Navigation(props: Props) {
     const toggleDrawer = (open: boolean) => () => {
         setLeft(open);
     };
+    const OpenLogin = useActions((dispatch:any) => dispatch.homeStore.setOpenLoginDialog);
     const sideList = (
         <div className={classes.list}>
             <List>
@@ -132,7 +134,12 @@ function Navigation(props: Props) {
             </List> */}
         </div>
     );
+    const OpenLoginDialog=()=>{
+        OpenLogin(true);
+    }
+    
     return (
+        
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
@@ -195,7 +202,7 @@ function Navigation(props: Props) {
                             }}
                         />
                     </div>
-                    <Button variant="outlined" color="secondary" className={classes.button}>
+                    <Button variant="outlined" color="secondary" className={classes.button} onClick={OpenLoginDialog}>
                         Đăng nhập
                     </Button>
                     <IconButton className={classes.account}
