@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +14,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import { Button, List, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core';
 import { useActions } from 'easy-peasy';
+import { Mutation } from 'react-apollo';
+import { Login_MUTATION } from '../../mutations/common';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+import { ButtonProps } from '@material-ui/core/Button';
+import { theme } from '../../styles/theme';
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -23,7 +29,7 @@ const styles = (theme: Theme) =>
         grow: {
             flexGrow: 1,
         },
-        grow3:{
+        grow3: {
             flexGrow: 3,
         },
         button: {
@@ -41,10 +47,6 @@ const styles = (theme: Theme) =>
         menuButton: {
             marginLeft: -12,
             marginRight: 20,
-            // display: 'block',
-            // [theme.breakpoints.up('sm')]: {
-            //     display: 'none',
-            // },
         },
         title: {
             display: 'none',
@@ -52,7 +54,7 @@ const styles = (theme: Theme) =>
                 display: 'block',
             },
         },
-        account:{
+        account: {
             display: 'block',
             [theme.breakpoints.up('sm')]: {
                 display: 'none',
@@ -88,6 +90,7 @@ const styles = (theme: Theme) =>
         inputRoot: {
             color: 'white',
             width: '100%',
+            
         },
         inputInput: {
             paddingTop: theme.spacing.unit,
@@ -105,14 +108,48 @@ const styles = (theme: Theme) =>
 
 export interface Props extends WithStyles<typeof styles> { }
 
+const StyledButton = styled((props: ButtonProps) => (
+    <Button  {...props} />
+))`
+    margin: ${theme.spacing.unit} !important;
+    font-size: 1em !important;
+    padding: 10px !important;
+    display: none !important;
+    ${theme.breakpoints.up('sm')} {
+        display: block !important;
+      }
+  `;
 
 function Navigation(props: Props) {
     const { classes } = props;
     const [left, setLeft] = useState<boolean>(false);
+    const [isRedirect, setRedirect] = useState<boolean>(false);
+    const email = useRef<HTMLInputElement>(null);
+    const password = useRef<HTMLInputElement>(null);
     const toggleDrawer = (open: boolean) => () => {
         setLeft(open);
     };
-    const OpenLogin = useActions((dispatch:any) => dispatch.homeStore.setOpenLoginDialog);
+    const loginUser = <Mutation
+        mutation={Login_MUTATION}>
+        {(login, { data }) => (
+            <StyledButton variant="outlined" color="secondary"  onClick={() => {
+                login({ variables: { email:email.current.value,password:password.current.value } })
+                .then(()=>{
+                    setRedirect(true);
+                });
+            }}>
+                Đăng nhập
+            </StyledButton>
+        )}
+    </Mutation>
+
+
+    const renderRedirect = () => {
+        if (isRedirect) {
+          return <Redirect to='/home' />
+        }
+      }
+    const OpenLogin = useActions((dispatch: any) => dispatch.homeStore.setOpenLoginDialog);
     const sideList = (
         <div className={classes.list}>
             <List>
@@ -134,13 +171,14 @@ function Navigation(props: Props) {
             </List> */}
         </div>
     );
-    const OpenLoginDialog=()=>{
+    const OpenLoginDialog = () => {
         OpenLogin(true);
     }
-    
+
     return (
-        
+
         <div className={classes.root}>
+        {renderRedirect()}
             <AppBar position="static">
                 <Toolbar>
                     <IconButton onClick={toggleDrawer(true)} className={classes.menuButton} color="secondary" aria-label="Open drawer">
@@ -160,21 +198,21 @@ function Navigation(props: Props) {
                         Beautiful Job
                      </Typography>
                     <div className={classes.grow} />
-                    <Button color="secondary" className={classes.button}>
+                    <StyledButton color="secondary" >
                         Home
-                     </Button>
+                     </StyledButton>
                     <div className={classes.grow} />
-                    <Button color="secondary" className={classes.button}>
+                    <StyledButton color="secondary" >
                         You can
-                     </Button>
+                     </StyledButton>
                     <div className={classes.grow} />
-                    <Button color="secondary" className={classes.button}>
+                    <StyledButton color="secondary" >
                         About
-                     </Button>
+                     </StyledButton>
                     <div className={classes.grow} />
-                    <Button color="secondary" className={classes.button}>
+                    <StyledButton color="secondary" >
                         Contact
-                     </Button>
+                     </StyledButton>
                     <div className={classes.grow3} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -183,6 +221,7 @@ function Navigation(props: Props) {
                         <InputBase
                             placeholder="Tên đăng nhập"
                             type="text"
+                            inputRef={email}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
@@ -196,15 +235,14 @@ function Navigation(props: Props) {
                         <InputBase
                             placeholder="Mật khẩu"
                             type="password"
+                            inputRef={password}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
                         />
                     </div>
-                    <Button variant="outlined" color="secondary" className={classes.button} onClick={OpenLoginDialog}>
-                        Đăng nhập
-                    </Button>
+                   {loginUser}
                     <IconButton className={classes.account}
                         aria-haspopup="true"
                         color="secondary"

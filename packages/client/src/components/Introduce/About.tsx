@@ -4,7 +4,7 @@ import Paper, { PaperProps } from '@material-ui/core/Paper';
 import { theme } from '../../styles/theme';
 import hinh1 from '../../images/hinh1.jpg';
 import hinh2 from '../../images/hinh2.jpg';
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 const Container = styled.div`
 display:flex;
@@ -44,38 +44,44 @@ function About() {
   return (
     <StyledPaper elevation={1} valuemargin={0}>
       <Container>
-        <StyledPaper valuemargin={15}>
-          <StyledImage src={hinh1} alt="nha phat trien beautiful job" />
-          <StyledDiv>
-            <Content>
-              <Typography variant="h6" color="inherit">
-                Team member
+        <Grid container>
+          <Grid item xs={12}>
+            <Grid container justify="center" >
+              <StyledPaper valuemargin={15}>
+                <StyledImage src={hinh1} alt="nha phat trien beautiful job" />
+                <StyledDiv>
+                  <Content>
+                    <Typography variant="h6" color="inherit">
+                      Team member
             </Typography>
-              <Typography variant="body1" color="inherit">
-                Front-end dev
+                    <Typography variant="body1" color="inherit">
+                      Front-end dev
             </Typography>
-              <ContainerInfo>
-                <FaceIcon /><FaceIcon /><FaceIcon /><FaceIcon />
-              </ContainerInfo>
-            </Content>
-          </StyledDiv>
-        </StyledPaper>
-        <StyledPaper valuemargin={15}>
-          <StyledImage src={hinh2} alt="nha phat trien beautiful job" />
-          <StyledDiv>
-            <Content>
-              <Typography variant="h6" color="inherit">
-                Team member
+                    <ContainerInfo>
+                      <FaceIcon /><FaceIcon /><FaceIcon /><FaceIcon />
+                    </ContainerInfo>
+                  </Content>
+                </StyledDiv>
+              </StyledPaper>
+              <StyledPaper valuemargin={15}>
+                <StyledImage src={hinh2} alt="nha phat trien beautiful job" />
+                <StyledDiv>
+                  <Content>
+                    <Typography variant="h6" color="inherit">
+                      Team member
             </Typography>
-              <Typography variant="body1" color="inherit">
-                Front-end dev
+                    <Typography variant="body1" color="inherit">
+                      Front-end dev
             </Typography>
-              <ContainerInfo>
-                <FaceIcon /><FaceIcon /><FaceIcon /><FaceIcon />
-              </ContainerInfo>
-            </Content>
-          </StyledDiv>
-        </StyledPaper>
+                    <ContainerInfo>
+                      <FaceIcon /><FaceIcon /><FaceIcon /><FaceIcon />
+                    </ContainerInfo>
+                  </Content>
+                </StyledDiv>
+              </StyledPaper>
+            </Grid>
+          </Grid>
+        </Grid>
       </Container>
     </StyledPaper>
   );

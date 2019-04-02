@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { CardProps } from '@material-ui/core/Card';
 import { TypographyProps } from '@material-ui/core/Typography';
 import { CardActionsProps } from '@material-ui/core/CardActions';
+import { CenterTypography } from '../common-type';
+import { theme } from '../../styles/theme';
 
 const Container = styled.div`
     display:flex;
@@ -13,12 +15,15 @@ const Container = styled.div`
     align-items:center;
     width:100%;
 `;
-const Div = (props:any)=><div {...props}></div>
+const Div = (props: any) => <div {...props}></div>
 const ContainerCard = styled(Div)`
     display:flex;
     justify-content:space-between;
     flex-direction:row;
     margin:${props => props.marintop}px 10% 0 10%;
+    ${theme.breakpoints.down('xs')}{
+            flex-direction:column;
+        }
     >div{
         margin:10px;
     }
@@ -56,14 +61,14 @@ function YouCan() {
             description: 'Giúp mọi người có cái nhìn tổng quan hơn về việc làm trong các lĩnh vực mình chon'
         },
 
-    ].map((item,index) =>
+    ].map((item, index) =>
         <div key={index}>
             <StyledCard>
                 <CardContent>
-                    <StyledTypography  color="inherit" gutterBottom>
+                    <StyledTypography color="inherit" gutterBottom>
                         {item.title}
                     </StyledTypography>
-                    <StyledTypography  variant="body1" color="textSecondary" gutterBottom>
+                    <StyledTypography variant="body1" color="textSecondary" gutterBottom>
                         {item.description}
                     </StyledTypography>
                 </CardContent>
@@ -79,12 +84,11 @@ function YouCan() {
                     This is a sheet of paper.
                 </Typography>
                 <br />
-                <Typography variant="body1" color="inherit" >
+                <CenterTypography variant="body1" color="inherit" style={{ maxWidth: '700px' }} >
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            </Typography>
-                <Typography variant="body1" color="inherit" >
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </Typography>
+            </CenterTypography>
+
             </Container>
             <ContainerCard marintop="50">
                 {cards}

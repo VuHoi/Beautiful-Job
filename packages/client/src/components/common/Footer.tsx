@@ -8,14 +8,20 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import StarIcon from '@material-ui/icons/Star';
 import { github } from '../../images/svg';
+import { theme } from '../../styles/theme';
 
 const Image = styled.img`
     width: 100%;
     height: 400px;
+    display:block !important;
+    ${theme.breakpoints.down('xs')}{
+        display:none !important;
+        }
 `
 
 const Background_Footer = styled.div`
     position: relative;
+   
     >div {
         position: absolute;
         top:0;
@@ -23,12 +29,19 @@ const Background_Footer = styled.div`
         background-color: ${ footerColor};
         height:400px;
         width:100%;
+        padding-bottom:50px;
         opacity:0.7;
+        ${theme.breakpoints.down('xs')}{
+            height:auto !important;
+        }
         >div {
             margin:0 10%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            ${theme.breakpoints.down('xs')}{
+                flex-direction: column;
+        }
             >div {
                 margin-top:50px;
                 height:400px;
@@ -37,6 +50,10 @@ const Background_Footer = styled.div`
                 display: flex;
                 color:white;
                 flex-direction: column;
+                ${theme.breakpoints.down('xs')}{
+               height:auto !important;
+               padding:5px;
+        }
             }
       }
     }
@@ -51,7 +68,7 @@ const About = styled.div`
 
 
 function Footer() {
-    
+
     const CategoriesJob = [
         'Công nghệ thông tin',
         'Kết toán',
@@ -93,9 +110,9 @@ function Footer() {
         <Typography variant="h6" color="secondary">
             Công ty chúng tôi là một công ty hiện đại nhất thế giới  với đội ngũ nhân viên có trình độ cao.
       </Typography>
-      <br/>
+        <br />
         <About>
-        {github}  <StarIcon />  <StarIcon />  <StarIcon />
+            {github}  <StarIcon />  <StarIcon />  <StarIcon />
         </About>
 
     </div>
@@ -104,6 +121,7 @@ function Footer() {
             <Image src={hand} alt="background footer" />
             <div  >
                 <div >
+
                     <div>
                         <Link
                             variant="h4" color="secondary" >
