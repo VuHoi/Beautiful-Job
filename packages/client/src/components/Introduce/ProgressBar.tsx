@@ -15,6 +15,7 @@ const Container = styled.div`
     border-radius: 100px;
     border: 3px solid ${borderColor};
     padding:20px;
+    margin:10px !important;
 `
 
 const Content = styled.div`
@@ -41,6 +42,7 @@ const ProgressBar: React.SFC<Value> = ({ value , title }) => {
     const CustomProgressBar = () => {
         setcompleted(completed >= value ? value : completed + 1)
     }
+
     useEffect(() => {
         const timer = setInterval(CustomProgressBar, 15);
         if (completed >= value) {
