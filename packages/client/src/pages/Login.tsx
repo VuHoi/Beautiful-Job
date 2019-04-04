@@ -1,4 +1,3 @@
 import React from 'react';
 
-const LoginPage = <h1>Login</h1>
-export default LoginPage;
+export const LoginPage=() => <h1>Home page</h1>

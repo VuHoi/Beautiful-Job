@@ -125,7 +125,6 @@ function Navigation(props: Props) {
     const { classes } = props;
     const [left, setLeft] = useState<boolean>(false);
     // const [show, setShowPosition] = useState<boolean>(false);
-    const [isRedirect, setRedirect] = useState<boolean>(false);
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
     const toggleDrawer = (open: boolean) => () => {
@@ -137,7 +136,7 @@ function Navigation(props: Props) {
             <StyledButton variant="outlined" color="secondary" onClick={() => {
                 login({ variables: { email: email.current.value, password: password.current.value } })
                     .then(() => {
-                        setRedirect(true);
+                        window.location.reload();
                     });
             }}>
                 Đăng nhập
@@ -146,11 +145,7 @@ function Navigation(props: Props) {
     </Mutation>
 
 
-    const renderRedirect = () => {
-        if (isRedirect) {
-            return <Redirect to='/home' />
-        }
-    }
+  
     const OpenLogin = useActions((dispatch: any) => dispatch.homeStore.setOpenLoginDialog);
     const sideList = (
         <div className={classes.list}>
@@ -187,7 +182,7 @@ function Navigation(props: Props) {
     return (
 
         <div className={classes.root}>
-            {renderRedirect()}
+         
             <AppBar position="fixed">
                 <Toolbar>
                     <IconButton onClick={toggleDrawer(true)} className={classes.menuButton} color="secondary" aria-label="Open drawer">
