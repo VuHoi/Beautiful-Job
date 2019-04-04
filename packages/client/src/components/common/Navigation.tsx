@@ -16,7 +16,6 @@ import { Button, List, ListItem, ListItemIcon, ListItemText, Drawer } from '@mat
 import { useActions } from 'easy-peasy';
 import { Mutation } from 'react-apollo';
 import { Login_MUTATION } from '../../mutations/common';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonProps } from '@material-ui/core/Button';
 import { theme } from '../../styles/theme';

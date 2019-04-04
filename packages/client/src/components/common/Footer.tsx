@@ -121,7 +121,6 @@ function Footer() {
             <Image src={hand} alt="background footer" />
             <div  >
                 <div >
-
                     <div>
                         <Link
                             variant="h4" color="secondary" >
