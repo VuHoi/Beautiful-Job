@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { TextField,Button, Dialog} from '@material-ui/core';
+import { TextField, Button, Dialog } from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import { useStore, useActions } from 'easy-peasy';
 import { DialogTitle, DialogContent } from '../../styles/globalStyleMaterial';
+import { ValidateRegister, FormControl, RegisterModel, EMAIL_REGEXP, PASSWORD_REGEXP } from '../../models/register';
 const Container = styled.div`
     display:flex;
     justify-content:center;
@@ -30,18 +31,29 @@ const StyledTextField = styled((props) => (
     <TextField  {...props} />
 ))`
        margin:10px !important;
+        ${props => props.color == 'true' ? 'border:1px solid red !important' : ''};
     `;
 const DivHorizontal = styled.div`
     display:flex;
     justify-content:space-between;
  `
+
 function Register() {
     const OpenRegister = useActions((dispatch: any) => dispatch.homeStore.setOpenRegisterDialog);
+    const [form, setForm] = useState<ValidateRegister>(new ValidateRegister());
+    const model: RegisterModel = new RegisterModel()
+    const onBlur = (field: FormControl) => {
+        let formValue = form;
+        formValue[field].valid = !(field === FormControl.email ? EMAIL_REGEXP.test(model[field].current.value) :
+            field === FormControl.password || field === FormControl.confirmPassword ? PASSWORD_REGEXP.test(model[field].current.value) :
+                !!model[field].current.value && model[field].current.value.length > 6);
+        setForm(formValue);
+    }
     const handleClose = () => {
         OpenRegister(false);
     }
     const IsOpen = useStore((state: any) => state.homeStore.IsOpenRegister);
-    console.log(IsOpen)
+    // console.log(IsOpen)
     return (
         <Dialog
             onClose={handleClose}
@@ -49,7 +61,7 @@ function Register() {
             open={IsOpen}
         >
             <DialogTitle id="customized-dialog-title" onClose={handleClose} >
-             Đăng kí
+                Đăng kí
           </DialogTitle>
             <DialogContent>
                 <Container>
@@ -62,6 +74,9 @@ function Register() {
                                 name="ho"
                                 margin="normal"
                                 variant="outlined"
+                                inputRef={model.firstName}
+                                onBlur={() => onBlur(FormControl.firstName)}
+                                color={form.firstName.valid.toString()}
                             />
                             <StyledTextField
                                 id="tendem"
@@ -70,6 +85,9 @@ function Register() {
                                 name="tendem"
                                 margin="normal"
                                 variant="outlined"
+                                inputRef={model.middleName}
+                                onBlur={() => onBlur(FormControl.middleName)}
+                                color={form.middleName.valid.toString()}
                             />
                             <StyledTextField
                                 id="ten"
@@ -78,35 +96,44 @@ function Register() {
                                 name="ten"
                                 margin="normal"
                                 variant="outlined"
+                                inputRef={model.lastName}
+                                onBlur={() => onBlur(FormControl.lastName)}
+                                color={form.lastName.valid.toString()}
                             />
                         </DivHorizontal>
-                        <TextField
+                        <StyledTextField
                             id="email"
                             label="Email"
                             type="text"
                             name="email"
-                            fullWidth
                             autoComplete="email"
                             margin="normal"
                             variant="outlined"
+                            inputRef={model.email}
+                            onBlur={() => onBlur(FormControl.email)}
+                            color={form.email.valid.toString()}
                         />
-                        <TextField
+                        <StyledTextField
                             id="_password"
                             label="Mật khẩu"
                             type="password"
                             name="_password"
-                            fullWidth
                             margin="normal"
                             variant="outlined"
+                            inputRef={model.password}
+                            onBlur={() => onBlur(FormControl.password)}
+                            color={form.password.valid.toString()}
                         />
-                         <TextField
+                        <StyledTextField
                             id="_password_"
                             label="Nhập lại mật khẩu"
                             type="password"
                             name="_password_"
-                            fullWidth
                             margin="normal"
                             variant="outlined"
+                            inputRef={model.confirmPassword}
+                            onBlur={() => onBlur(FormControl.confirmPassword)}
+                            color={form.confirmPassword.valid.toString()}
                         />
                         <StyledContainerCenter>
                             <StyledSubmit variant="outlined" color="primary" onClick={handleClose} >
