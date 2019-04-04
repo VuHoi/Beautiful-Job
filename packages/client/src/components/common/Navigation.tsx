@@ -20,6 +20,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { ButtonProps } from '@material-ui/core/Button';
 import { theme } from '../../styles/theme';
+import { Link } from 'react-scroll'
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -90,7 +91,7 @@ const styles = (theme: Theme) =>
         inputRoot: {
             color: 'white',
             width: '100%',
-            
+
         },
         inputInput: {
             paddingTop: theme.spacing.unit,
@@ -123,6 +124,7 @@ const StyledButton = styled((props: ButtonProps) => (
 function Navigation(props: Props) {
     const { classes } = props;
     const [left, setLeft] = useState<boolean>(false);
+    // const [show, setShowPosition] = useState<boolean>(false);
     const [isRedirect, setRedirect] = useState<boolean>(false);
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
@@ -132,11 +134,11 @@ function Navigation(props: Props) {
     const loginUser = <Mutation
         mutation={Login_MUTATION}>
         {(login, { data }) => (
-            <StyledButton variant="outlined" color="secondary"  onClick={() => {
-                login({ variables: { email:email.current.value,password:password.current.value } })
-                .then(()=>{
-                    setRedirect(true);
-                });
+            <StyledButton variant="outlined" color="secondary" onClick={() => {
+                login({ variables: { email: email.current.value, password: password.current.value } })
+                    .then(() => {
+                        setRedirect(true);
+                    });
             }}>
                 Đăng nhập
             </StyledButton>
@@ -146,9 +148,9 @@ function Navigation(props: Props) {
 
     const renderRedirect = () => {
         if (isRedirect) {
-          return <Redirect to='/home' />
+            return <Redirect to='/home' />
         }
-      }
+    }
     const OpenLogin = useActions((dispatch: any) => dispatch.homeStore.setOpenLoginDialog);
     const sideList = (
         <div className={classes.list}>
@@ -174,12 +176,19 @@ function Navigation(props: Props) {
     const OpenLoginDialog = () => {
         OpenLogin(true);
     }
+    // window.addEventListener('scroll', () => {// lodash debounce method.
+    //     let supportPageOffset = window.pageXOffset !== undefined;
+    //     let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
+    //     let scrollPosition = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+    //     console.log(scrollPosition)
+    //     setShowPosition(scrollPosition > 0)
 
+    // });
     return (
 
         <div className={classes.root}>
-        {renderRedirect()}
-            <AppBar position="static">
+            {renderRedirect()}
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton onClick={toggleDrawer(true)} className={classes.menuButton} color="secondary" aria-label="Open drawer">
                         <MenuIcon />
@@ -199,20 +208,30 @@ function Navigation(props: Props) {
                      </Typography>
                     <div className={classes.grow} />
                     <StyledButton color="secondary" >
-                        Home
-                     </StyledButton>
+                        <Link className="test6" to="home" spy={true} smooth={true} duration={500}>
+                            Home
+                         </Link>
+                    </StyledButton>
                     <div className={classes.grow} />
                     <StyledButton color="secondary" >
-                        You can
-                     </StyledButton>
+
+                        <Link className="test6" to="youcan" spy={true} smooth={true} duration={500}>
+                            You can
+                         </Link>
+                    </StyledButton>
                     <div className={classes.grow} />
                     <StyledButton color="secondary" >
-                        About
-                     </StyledButton>
+
+                        <Link className="test6" to="about" spy={true} smooth={true} duration={500}>
+                            About
+                         </Link>
+                    </StyledButton>
                     <div className={classes.grow} />
                     <StyledButton color="secondary" >
-                        Contact
-                     </StyledButton>
+                        <Link className="test6" to="contact" spy={true} smooth={true} duration={500}>
+                            Contact
+                         </Link>
+                    </StyledButton>
                     <div className={classes.grow3} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -242,7 +261,7 @@ function Navigation(props: Props) {
                             }}
                         />
                     </div>
-                   {loginUser}
+                    {loginUser}
                     <IconButton className={classes.account}
                         aria-haspopup="true"
                         color="secondary"
