@@ -20,6 +20,7 @@ const Image = styled.img`
     }
 `
 const Background_Slide = styled.div`
+    margin-top:50px;
     position: relative;
     >div {
         position: absolute;
@@ -70,7 +71,7 @@ function Slide() {
     }
 
     return (
-        <Background_Slide >
+        <Background_Slide id="home">
             <Image src={ImageSlide} alt="image slide" />
             <div>
                 <div>

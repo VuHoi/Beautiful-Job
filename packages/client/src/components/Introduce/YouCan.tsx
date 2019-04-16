@@ -79,7 +79,7 @@ function YouCan() {
         </div>)
     return (
         <div>
-            <Container>
+            <Container id="youcan">
                 <Typography variant="h5" color="inherit" >
                     This is a sheet of paper.
                 </Typography>
