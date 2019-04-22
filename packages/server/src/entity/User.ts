@@ -11,7 +11,6 @@ import {
 import { Field, ID, ObjectType, Root } from 'type-graphql';
 import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
 import { IsEmail, IsDate } from 'class-validator';
-import { Card } from './Card';
 import { UserPost } from './UserPost';
 
 @ObjectType()
@@ -66,10 +65,6 @@ export class User extends BaseEntity {
 	@IsDate()
 	@CreateDateColumn()
 	created_date: Date;
-
-	@OneToOne(type => Card)
-	@JoinColumn()
-	card: Card;
 
 	@OneToMany(() => UserPost, userpost => userpost.users)
 	userPost: Promise<UserPost[]>;
