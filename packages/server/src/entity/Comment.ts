@@ -3,18 +3,15 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	CreateDateColumn,
-	JoinColumn,
-	ManyToOne,
-	OneToMany
+	OneToOne,
+	JoinColumn
 } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 import { User } from './User';
-import { GroupJob } from './GroupJob';
-import { PostTag } from './PostTag';
 
 @ObjectType()
-@Entity('Posts')
+@Entity('Comments')
 export class Post {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
@@ -29,20 +26,21 @@ export class Post {
 	@Column('text')
 	content: string;
 
+	@OneToOne(type => User)
+	@JoinColumn()
+	sender: User;
+
+	@OneToOne(type => User)
+	@JoinColumn()
+	participant: User;
+
 	@Field()
 	@Column('boolean', {
 		default: 'true'
 	})
 	isPublic: boolean;
 
-	@ManyToOne(() => User, user => user.posts)
+	@OneToOne(type => Post)
 	@JoinColumn()
-	user: Promise<User>;
-
-	@ManyToOne(() => GroupJob, groupJob => groupJob.posts)
-	@JoinColumn()
-	groupJob: Promise<GroupJob>;
-
-	@OneToMany(() => PostTag, postTag => postTag.tags)
-	tags: Promise<PostTag>;
+	post: Post;
 }

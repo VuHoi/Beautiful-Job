@@ -2,16 +2,14 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
-	BaseEntity
+	CreateDateColumn
 } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 
 @ObjectType()
-@Entity('Cards')
-export class Card extends BaseEntity {
+@Entity('Companys')
+export class Company {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
@@ -19,25 +17,13 @@ export class Card extends BaseEntity {
 	@Field()
 	@IsDate()
 	@CreateDateColumn()
-	created_at: Date;
-
-	@Field()
-	@UpdateDateColumn()
-	updated_at: Date;
+	establishedDate: Date;
 
 	@Field()
 	@Column('text')
-	title: string;
+	name: string;
 
 	@Field()
-	@Column('text', {
-		nullable: true
-	})
+	@Column('text')
 	description: string;
-
-	@Field()
-	@Column('boolean', {
-		default: 'false'
-	})
-	done: boolean;
 }

@@ -3,19 +3,17 @@ import {
 	Column,
 	Entity,
 	PrimaryGeneratedColumn,
-	OneToOne,
-	JoinColumn,
 	OneToMany,
 	CreateDateColumn
 } from 'typeorm';
 import { Field, ID, ObjectType, Root } from 'type-graphql';
 import { IsEmailExist } from '../graphql/user/register/IsEmailExistConstraint';
 import { IsEmail, IsDate } from 'class-validator';
-import { Card } from './Card';
-import { UserPost } from './UserPost';
+import { Post } from './Post';
+import { ParticipantMessage } from './ParticipantMessage';
 
 @ObjectType()
-@Entity()
+@Entity('Users')
 export class User extends BaseEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
@@ -67,12 +65,17 @@ export class User extends BaseEntity {
 	@CreateDateColumn()
 	created_date: Date;
 
-	@OneToOne(type => Card)
-	@JoinColumn()
-	card: Card;
+	@OneToMany(() => User, user => user.friends)
+	friends: Promise<User[]>;
 
-	@OneToMany(() => UserPost, userpost => userpost.users)
-	userPost: Promise<UserPost[]>;
+	@OneToMany(() => Post, post => post.user)
+	posts: Promise<Post[]>;
+
+	@OneToMany(
+		() => ParticipantMessage,
+		participantMessage => participantMessage.users
+	)
+	messages: Promise<ParticipantMessage[]>;
 
 	@Field()
 	name(@Root() parent: User): string {

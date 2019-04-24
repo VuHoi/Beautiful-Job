@@ -15,7 +15,6 @@ export interface Props extends WithStyles<typeof styles> { }
 
 function Infomation(props: Props) {
     const { classes } = props;
-   
     return (
         <div>Hello</div>
     );

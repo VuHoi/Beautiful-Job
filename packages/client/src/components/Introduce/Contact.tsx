@@ -49,7 +49,7 @@ const currentUser = <Query query={CurrentUser_QUERY}>
 
 function Contact() {
     return (
-        <Container>
+        <Container id="contact">
             <StyledTypography variant="h5" color="inherit">
                 Liên hệ với chúng tôi
 

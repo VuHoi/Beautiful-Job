@@ -42,7 +42,7 @@ const ContainerInfo = styled.div`
 `
 function About() {
   return (
-    <StyledPaper elevation={1} valuemargin={0}>
+    <StyledPaper elevation={1} valuemargin={0} id="about">
       <Container>
         <Grid container>
           <Grid item xs={12}>

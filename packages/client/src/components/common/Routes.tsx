@@ -1,15 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import IntroducePage from '../../pages/Introduce';
 import { HomePage } from '../../pages/Home';
-
+import { withCookies } from 'react-cookie';
+import { ProtectedRoute } from './ProtectedRoute';
+import { BlankRoute } from './BlankRoute';
+import { LoginPage } from '../../pages/Login';
 const Routes = () => (
 	<BrowserRouter>
 		<Switch>
-			<Route exact path='/' component={IntroducePage}/>
-			<Route exact path='/home' component={HomePage} />
+			<Route exact path='/dangnhap' component={LoginPage} />
+			<ProtectedRoute path='/home' Comp={HomePage} />
+			<BlankRoute />
 		</Switch>
 	</BrowserRouter>
 );
 
-export default Routes;
+export default withCookies(Routes);
