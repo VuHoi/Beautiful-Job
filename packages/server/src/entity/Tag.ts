@@ -16,4 +16,7 @@ export class Tag {
 	@Field()
 	@Column('text')
 	description: string;
+
+	@OneToMany(() => PostTag, postTag => postTag.posts)
+	posts: Promise<PostTag>;
 }

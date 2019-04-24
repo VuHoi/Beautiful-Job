@@ -10,7 +10,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 
 @ObjectType()
-@Entity('cards')
+@Entity('Cards')
 export class Card extends BaseEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
