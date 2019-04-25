@@ -9,6 +9,7 @@ import { ForgotPasswordResolver } from './user/forgotPasswordResolve';
 import { MeResolver } from './user/meResolver';
 import { ProfilePictureResolver } from './user/profilePictureResolver';
 import * as jwt from 'jsonwebtoken';
+import { PostResolver } from './post/postResolve';
 export class GraphQL {
 	public createSchema = async (): Promise<GraphQLSchema> => {
 		return buildSchema({
@@ -20,7 +21,8 @@ export class GraphQL {
 				ChangePasswordResolver,
 				ForgotPasswordResolver,
 				MeResolver,
-				ProfilePictureResolver
+				ProfilePictureResolver,
+				PostResolver
 			],
 			authChecker: ({ context: { req } }) => {
 				console.log(req.session.token);

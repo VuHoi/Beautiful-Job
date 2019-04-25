@@ -4,15 +4,17 @@ import {
 	Column,
 	CreateDateColumn,
 	OneToOne,
-	JoinColumn
+	JoinColumn,
+	BaseEntity
 } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 import { User } from './User';
+import { Post } from './Post';
 
 @ObjectType()
 @Entity('Comments')
-export class Post {
+export class Comment extends BaseEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
 	id: string;

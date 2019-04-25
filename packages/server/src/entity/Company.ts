@@ -2,14 +2,15 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn
+	CreateDateColumn,
+	BaseEntity
 } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
 
 @ObjectType()
 @Entity('Companys')
-export class Company {
+export class Company extends BaseEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
 	id: string;

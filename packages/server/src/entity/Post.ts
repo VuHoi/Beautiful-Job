@@ -5,7 +5,8 @@ import {
 	CreateDateColumn,
 	JoinColumn,
 	ManyToOne,
-	OneToMany
+	OneToMany,
+	BaseEntity
 } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { IsDate } from 'class-validator';
@@ -15,7 +16,7 @@ import { PostTag } from './PostTag';
 
 @ObjectType()
 @Entity('Posts')
-export class Post {
+export class Post extends BaseEntity {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
@@ -35,12 +36,18 @@ export class Post {
 	})
 	isPublic: boolean;
 
+	@Field(() => ID)
+	userId: string;
+
+	@Field(() => ID)
+	groupJobId: string;
+
 	@ManyToOne(() => User, user => user.posts)
-	@JoinColumn()
+	@JoinColumn({ name: 'userId' })
 	user: Promise<User>;
 
 	@ManyToOne(() => GroupJob, groupJob => groupJob.posts)
-	@JoinColumn()
+	@JoinColumn({ name: 'groupJobId' })
 	groupJob: Promise<GroupJob>;
 
 	@OneToMany(() => PostTag, postTag => postTag.tags)
